@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuners do Oeste | Livro de Manutenções</title>
+  <meta name="description" content="Livro de manutenções do Fiat Punto Evo 1.3 Multijet 95cv — Trovão de Prata.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="assets/logo.jpeg" alt="Tuners do Oeste">
+      </div>
+      <nav>
+        <button class="nav-btn active" data-section="maintenance">▣ <span>Livro de Manutenções</span></button>
+        <button class="nav-btn" data-section="new">＋ <span>Novo Registo</span></button>
+        <button class="nav-btn" data-section="project">▣ <span>Projeto Fiat</span></button>
+        <button class="nav-btn" data-section="stats">◒ <span>Estatísticas</span></button>
+        <button class="nav-btn" data-section="backup">⇅ <span>Exportar / Importar</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <a class="instagram-link" href="https://www.instagram.com/tunersdooeste/" target="_blank" rel="noopener">
+          <span class="ig-icon">◎</span>
+          <span><small>Instagram</small><strong>@tunersdooeste</strong></span>
+          <span>↗</span>
+        </a>
+        <p class="version">Tuners do Oeste · Livro v1.0</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1>Livro de Manutenções</h1>
+          <p>Fiat Punto Evo 1.3 Multijet 95cv</p>
+        </div>
+        <div class="top-actions">
+          <button id="editModeBtn" class="btn btn-outline">✎ Modo de Edição: <b id="editState">OFF</b></button>
+          <button id="newRecordBtn" class="btn btn-red">＋ Novo Registo</button>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <span class="eyebrow">PROJETO FIAT</span>
+          <h2>TROVÃO<br>DE PRATA</h2>
+          <p class="hero-model">FIAT PUNTO EVO 1.3 MULTIJET 95CV</p>
+          <div class="specs">
+            <div><span>⚙</span><b>Motor</b><em>1.3 Multijet</em></div>
+            <div><span>ϟ</span><b>Potência</b><em>95 cv</em></div>
+            <div><span>⛽</span><b>Combustível</b><em>Diesel</em></div>
+            <div><span>▣</span><b>Ano</b><em id="heroYear">2011</em></div>
+            <div><span>●</span><b>Cor</b><em>Cinza Prata</em></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="maintenance" class="section active-section">
+        <div class="content-grid">
+          <div class="panel large">
+            <div class="panel-title">
+              <div><h2>Registos de Manutenção</h2><p>Histórico completo do veículo</p></div>
+              <button class="btn btn-red small" id="newRecordBtn2">＋ Novo Registo</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr>
+                  <th>Data</th><th>Quilometragem</th><th>Tipo</th><th>Descrição</th>
+                  <th>Oficina / Fornecedor</th><th>Custo</th><th>Ações</th>
+                </tr></thead>
+                <tbody id="recordsBody"></tbody>
+              </table>
+              <div id="emptyState" class="empty hidden">Ainda não existem registos. Ative o modo de edição ou clique em “Novo Registo”.</div>
+            </div>
+            <div class="summary">
+              <div><span>▤</span><small>Total de Registos</small><strong id="totalRecords">0</strong></div>
+              <div><span>🚗</span><small>Quilometragem Atual</small><strong id="currentKm">0 km</strong></div>
+              <div><span>€</span><small>Total Gasto</small><strong id="totalCost">0,00 €</strong></div>
+            </div>
+          </div>
+
+          <div class="panel project-card">
+            <div class="panel-title"><div><h2>Projeto Fiat</h2><p>Dados do Trovão de Prata</p></div><button class="btn btn-outline small" id="editProjectBtn">✎ Editar</button></div>
+            <img id="projectImage" class="project-image" src="assets/trovao-de-prata.jpeg" alt="Trovão de Prata">
+            <div class="project-data" id="projectData"></div>
+            <a class="instagram-cta" href="https://www.instagram.com/tunersdooeste/" target="_blank" rel="noopener">Instagram @tunersdooeste ↗</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="new" class="section">
+        <div class="panel form-panel">
+          <div class="panel-title"><div><h2>Novo Registo</h2><p>Adicione uma manutenção ao histórico</p></div></div>
+          <form id="recordForm" class="form-grid">
+            <label>Data<input type="date" name="date" required></label>
+            <label>Quilometragem<input type="number" name="km" min="0" required></label>
+            <label>Tipo<select name="type"><option>Revisão</option><option>Peças</option><option>Reparação</option><option>Inspeção</option><option>Outros</option></select></label>
+            <label>Descrição<input name="description" required placeholder="Ex.: Óleo e filtros"></label>
+            <label>Oficina / Fornecedor<input name="supplier" placeholder="Nome da oficina"></label>
+            <label>Custo (€)<input type="number" name="cost" min="0" step="0.01" value="0"></label>
+            <label class="full">Observações<textarea name="notes" rows="4" placeholder="Notas adicionais..."></textarea></label>
+            <div class="form-actions full"><button type="button" class="btn btn-outline" data-section-go="maintenance">Cancelar</button><button class="btn btn-red" type="submit">Guardar Registo</button></div>
+          </form>
+        </div>
+      </section>
+
+      <section id="project" class="section">
+        <div class="panel form-panel">
+          <div class="panel-title"><div><h2>Projeto Fiat</h2><p>Edite os dados apresentados no painel principal.</p></div></div>
+          <form id="projectForm" class="form-grid">
+            <label>Nome do projeto<input name="name" required></label>
+            <label>Modelo<input name="model" required></label>
+            <label>Motor<input name="engine" required></label>
+            <label>Potência<input name="power" required></label>
+            <label>Ano<input name="year" type="number"></label>
+            <label>Cor<input name="color"></label>
+            <label>Instagram<input name="instagram" placeholder="https://www.instagram.com/tunersdooeste/"></label>
+            <label>Quilometragem inicial<input name="initialKm" type="number"></label>
+            <div class="form-actions full"><button type="submit" class="btn btn-red">Guardar Alterações</button></div>
+          </form>
+        </div>
+      </section>
+
+      <section id="stats" class="section">
+        <div class="stats-grid">
+          <div class="panel stat"><small>Registos</small><strong id="statRecords">0</strong></div>
+          <div class="panel stat"><small>Custo total</small><strong id="statCost">0,00 €</strong></div>
+          <div class="panel stat"><small>Custo médio</small><strong id="statAvg">0,00 €</strong></div>
+          <div class="panel stat"><small>Última quilometragem</small><strong id="statKm">0 km</strong></div>
+        </div>
+        <div class="panel"><h2>Distribuição por tipo</h2><div id="typeStats" class="bars"></div></div>
+      </section>
+
+      <section id="backup" class="section">
+        <div class="panel backup-panel">
+          <h2>Exportar / Importar</h2>
+          <p>Faça uma cópia dos registos e dados do projeto num ficheiro JSON.</p>
+          <div class="backup-actions">
+            <button class="btn btn-red" id="exportBtn">⇩ Exportar ficheiro</button>
+            <label class="btn btn-outline file-label">⇧ Importar ficheiro<input id="importInput" type="file" accept=".json,application/json" hidden></label>
+            <button class="btn btn-danger-outline" id="clearAllBtn">🗑 Apagar todos os registos</button>
+          </div>
+        </div>
+      </section>
+
+      <footer>© 2026 Tuners do Oeste · Trovão de Prata · Fiat Punto Evo 1.3 Multijet 95cv</footer>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-box">
+      <button id="closeModal" class="modal-close">×</button>
+      <h2 id="modalTitle">Editar Registo</h2>
+      <form id="editForm" class="form-grid">
+        <input type="hidden" name="id">
+        <label>Data<input type="date" name="date" required></label>
+        <label>Quilometragem<input type="number" name="km" min="0" required></label>
+        <label>Tipo<select name="type"><option>Revisão</option><option>Peças</option><option>Reparação</option><option>Inspeção</option><option>Outros</option></select></label>
+        <label>Descrição<input name="description" required></label>
+        <label>Oficina / Fornecedor<input name="supplier"></label>
+        <label>Custo (€)<input type="number" name="cost" min="0" step="0.01"></label>
+        <label class="full">Observações<textarea name="notes" rows="4"></textarea></label>
+        <div class="form-actions full"><button type="button" id="cancelModal" class="btn btn-outline">Cancelar</button><button class="btn btn-red">Guardar</button></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
